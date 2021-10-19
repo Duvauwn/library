@@ -1,3 +1,4 @@
+
 // My Array of objects
 let myLibrary = [
     {
@@ -37,10 +38,11 @@ function openForm() {
 function closeForm() {
     document.getElementById('bookForm').style.display = 'none';
 }
-const formData = new FormData(document.querySelector('#form-container'))
-for (let pair of formData.entries()) {
-    console.log(addBookToLibrary(pair))
-}
+const form = document.getElementById('form-container');
+form.addEventListener('submit', function () {
+    console.log('testin');
+})
+
 addBookToLibrary('test', 'me', '23 pages', 'read it');
 
 //Creates a table that displays my array of objects
@@ -87,6 +89,5 @@ del.forEach(button => {
     button.addEventListener('click', function () {
         myLibrary.splice(button.id, 1);
         table.removeChild(row1);
-        console.table(myLibrary);
     })
 })
