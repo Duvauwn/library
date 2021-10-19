@@ -27,9 +27,9 @@ class Book {
     }
 }
 // The Add Book Function
-function addBookToLibrary(title, author, pages, read) {
+let addBookToLibrary = function (title, author, pages, read) {
     const book = new Book(title, author, pages, read);
-    myLibrary.push(book);
+    return myLibrary.push(book);
 }
 // functions for pop-up form
 function openForm() {
@@ -38,17 +38,24 @@ function openForm() {
 function closeForm() {
     document.getElementById('bookForm').style.display = 'none';
 }
+let bookArray;
 function sendName() {
-    let title = document.querySelector('#title');
-    let author = document.querySelector('#author');
-    let pages = document.querySelector('#pages');
-    let read = document.querySelector('#read');
-    localStorage.setItem('title', title.value);
-    localStorage.setItem('author', author.value);
-    localStorage.setItem('pages', pages.value);
-    localStorage.setItem('read', read.value);
-    addBookToLibrary('test', 'me', '23 pages', true);
-    return addBookToLibrary(toString(title.value), toString(author.value), toString(pages.value), toString(read.value))
+    let titles = document.querySelector('#title');
+    let authors = document.querySelector('#author');
+    let page = document.querySelector('#pages');
+    let reads = document.querySelector('#read');
+    let stri = [{ 'title': titles.value, 'author': authors.value, 'pages': page.value, 'read': reads.value }];
+    let newBook = JSON.stringify(stri);
+    localStorage.setItem('newBook', newBook);
+    let obje = localStorage.getItem('newBook');
+    console.log(obje);
+    bookArray = JSON.parse(obje);
+    console.log(bookArray);
+    return myLibrary.push(bookArray);
+    //localStorage.setItem('title', titles.value);
+    //localStorage.setItem('author', authors.value);
+    //localStorage.setItem('pages', page.value);
+    //localStorage.setItem('read', reads.value);
 }
 
 //Creates a table that displays my array of objects
@@ -95,6 +102,7 @@ del.forEach(button => {
     button.addEventListener('click', function () {
         myLibrary.splice(button.id, 1);
         table.removeChild(row1);
+        localStorage.setItem('Library', JSON.stringify(myLibrary))
     })
 })
 
@@ -104,4 +112,3 @@ let str = JSON.stringify(myLibrary);
 localStorage.setItem('Library', str);
 
 let obj = JSON.parse(str);
-console.table(obj)
