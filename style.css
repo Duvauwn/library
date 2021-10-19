@@ -12,7 +12,10 @@ h1 {
     text-align: center;
     color: bisque;
 }
-#books {
+#table {
+    border:1px groove bisque;
+}
+#table th {
     color:bisque;
 }
 
@@ -65,8 +68,8 @@ h1 {
 }
 
 /* Add a red background color to the cancel button */
-#form-container .cancel {
-    background-color: red;
+#form-container #cancel {
+    background-color: #d45f59;
   }
   
   /* Add some hover effects to buttons */
