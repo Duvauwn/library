@@ -37,11 +37,15 @@ function openForm() {
 function closeForm() {
     document.getElementById('bookForm').style.display = 'none';
 }
+const formData = new FormData(document.querySelector('#form-container'))
+for (let pair of formData.entries()) {
+    console.log(addBookToLibrary(pair))
+}
 addBookToLibrary('test', 'me', '23 pages', 'read it');
 
 //Creates a table that displays my array of objects
 let myTable = document.querySelector('#table');
-let headers = ['Title', 'Author', 'Pages', 'Read'];
+let headers = ['Title', 'Author', 'Pages', 'Read', 'Remove'];
 
 let table = document.createElement('table');
 let headerRow = document.createElement('tr');
@@ -54,17 +58,35 @@ headers.forEach(headerText => {
 })
 table.appendChild(headerRow);
 
+let i = 0;
+
 myLibrary.forEach(novel => {
     let row = document.createElement('tr');
-
+    row.classList.add('data-' + i);
+    let remove = document.createElement('button');
+    remove.classList.add('remove');
+    remove.id = i;
+    remove.textContent = 'Remove';
+    i++;
     Object.values(novel).forEach(text => {
         let cell = document.createElement('td');
         let textNode = document.createTextNode(text);
         cell.appendChild(textNode);
         row.appendChild(cell);
     })
+    row.appendChild(remove);
 
     table.appendChild(row);
 });
 
 myTable.appendChild(table);
+
+let del = document.querySelectorAll('.remove');
+del.forEach(button => {
+    let row1 = document.querySelector('.data-' + button.id);
+    button.addEventListener('click', function () {
+        myLibrary.splice(button.id, 1);
+        table.removeChild(row1);
+        console.table(myLibrary);
+    })
+})
