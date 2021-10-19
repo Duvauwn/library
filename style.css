@@ -1,0 +1,79 @@
+html {
+    background-image: url('lib.jpg');
+    background-size:1920px;
+    box-sizing: border-box;
+}
+body {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1 {
+    text-align: center;
+    color: bisque;
+}
+#books {
+    color:bisque;
+}
+
+/*styling the form stuff*/
+
+/* Button used tp open the contact form*/
+#open {
+    border: none;
+    cursor:pointer;
+    opacity: 0.8;
+
+/*The popup form - hidden by default*/
+.formPopup {
+    display:none;
+    position: fixed;
+    bottom:0;
+    right:15px;
+    border: 3px solid #f1f1f1;
+    z-index:9;
+}
+
+/*The form container*/
+#form-container {
+    max-width:300px;
+    padding:10px;
+    background-color: white;
+}
+
+/*Full-width input fields*/
+#form-container input[type=text], #form-container input[type=button] {
+    width:100%;
+    padding:15px;
+    margin:5px 0 22px 0;
+    border:none;
+    background: #f1f1f1;
+}
+
+/*When inputs get focus, do something*/
+#form-container input[type=text]:focus, #form-container input[type=button]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/*Set a stlye for the submit button*/
+#form-container .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+#form-container .cancel {
+    background-color: red;
+  }
+  
+  /* Add some hover effects to buttons */
+  #form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
