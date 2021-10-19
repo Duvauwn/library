@@ -19,7 +19,7 @@
     <button id='open' onclick='openForm()'>Add a New Book</button>
 
     <div class='formPopup' id='bookForm'>
-        <form action='/script.js' id='form-container' method="post">
+        <form action='#' id='form-container' onsubmit="sendName()">
             <h2>Add a New Book</h2>
 
             <label for='title'>Title:</label><br>
@@ -35,7 +35,8 @@
             <input type='checkbox' id='read' name='read'>
 
             <button type='submit' class='btn' id='submit'>Submit</button>
-            <button type='button' class='btn' id='cancel' onclick='closeForm()'>Close</button>
+            <button type='button' class='btn' id='cancel' onclick='closeForm()'>
+                Close</button>
         </form>
     </div>
 

@@ -3,15 +3,15 @@
 let myLibrary = [
     {
         title: 'The Hobbit', author: 'J.R.R. Tolkien', pages: '245 pages',
-        read: 'not read yet',
+        read: false,
     },
     {
         title: 'The Shining', author: 'Hitchcock', pages: '322 pages',
-        read: 'not read yet',
+        read: false,
     },
     {
         title: 'Lord of the Rings', author: 'J.R.R. Tolkien', pages: '456 pages',
-        read: 'read it',
+        read: true,
     }
 ];
 // The Book Object Constructor
@@ -38,12 +38,18 @@ function openForm() {
 function closeForm() {
     document.getElementById('bookForm').style.display = 'none';
 }
-const form = document.getElementById('form-container');
-form.addEventListener('submit', function () {
-    console.log('testin');
-})
-
-addBookToLibrary('test', 'me', '23 pages', 'read it');
+function sendName() {
+    let title = document.querySelector('#title');
+    let author = document.querySelector('#author');
+    let pages = document.querySelector('#pages');
+    let read = document.querySelector('#read');
+    localStorage.setItem('title', title.value);
+    localStorage.setItem('author', author.value);
+    localStorage.setItem('pages', pages.value);
+    localStorage.setItem('read', read.value);
+    addBookToLibrary('test', 'me', '23 pages', true);
+    return addBookToLibrary(toString(title.value), toString(author.value), toString(pages.value), toString(read.value))
+}
 
 //Creates a table that displays my array of objects
 let myTable = document.querySelector('#table');
@@ -91,3 +97,11 @@ del.forEach(button => {
         table.removeChild(row1);
     })
 })
+
+//Implementing localStorage
+let str = JSON.stringify(myLibrary);
+
+localStorage.setItem('Library', str);
+
+let obj = JSON.parse(str);
+console.table(obj)
