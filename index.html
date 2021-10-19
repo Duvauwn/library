@@ -15,6 +15,9 @@
     <div id='books'>
 
     </div>
+
+    <button id='open' onclick='openForm()'>Add a New Book</button>
+
     <div class='formPopup' id='bookForm'>
         <form action='/action_page.php' id='form-container'>
             <h2>Add a New Book</h2>
@@ -29,14 +32,14 @@
             <input type='text' id='pages' name='pages'><br>
 
             <label for='read'>Have you read it?</label><br>
-            <input type='button' id='read' name='read'>
+            <input type='checkbox' id='read' name='read'>
 
             <button type='submit' class='btn'>Submit</button>
             <button type='button' class='btn' id='cancel' onclick='closeForm()'>Close</button>
         </form>
     </div>
 
-    <button id='open' onclick='openForm()'>Add a New Book</button>
+
 
 </body>
 
