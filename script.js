@@ -1,4 +1,3 @@
-
 // My Array of objects
 let myLibrary = [
     {
@@ -14,6 +13,7 @@ let myLibrary = [
         read: true,
     }
 ];
+
 // The Book Object Constructor
 class Book {
     constructor(title, author, pages, read) {
@@ -21,13 +21,10 @@ class Book {
         this.author = author;
         this.pages = pages;
         this.read = read;
-        //this.info = function () {
-        //    return title + ' by ' + author + ', ' + pages + ', ' + read;
-        //};
     }
 }
 // The Add Book Function
-let addBookToLibrary = function (title, author, pages, read) {
+function addBookToLibrary(title, author, pages, read) {
     const book = new Book(title, author, pages, read);
     return myLibrary.push(book);
 }
@@ -39,7 +36,9 @@ function closeForm() {
     document.getElementById('bookForm').style.display = 'none';
 }
 let bookArray;
-function sendName() {
+
+let submit = document.querySelector('#submit')
+submit.addEventListener('click', function () {
     let titles = document.querySelector('#title');
     let authors = document.querySelector('#author');
     let page = document.querySelector('#pages');
@@ -47,18 +46,17 @@ function sendName() {
     let stri = [{ 'title': titles.value, 'author': authors.value, 'pages': page.value, 'read': reads.value }];
     let newBook = JSON.stringify(stri);
     localStorage.setItem('newBook', newBook);
-    let obje = localStorage.getItem('newBook');
-    console.log(obje);
-    bookArray = JSON.parse(obje);
-    console.log(bookArray);
-    return myLibrary.push(bookArray);
-    //localStorage.setItem('title', titles.value);
-    //localStorage.setItem('author', authors.value);
-    //localStorage.setItem('pages', page.value);
-    //localStorage.setItem('read', reads.value);
-}
+},
+    function () {
+        let obje = localStorage.getItem('newBook');
+        bookArray = JSON.parse(obje);
+        console.log(bookArray);
+        myLibrary.push(bookArray[0]);
+    })
 
-//Creates a table that displays my array of objects
+
+
+//Creates a dynamic table that is able to change based on user input
 let myTable = document.querySelector('#table');
 let headers = ['Title', 'Author', 'Pages', 'Read', 'Remove'];
 
