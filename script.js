@@ -36,7 +36,7 @@ function closeForm() {
     document.getElementById('bookForm').style.display = 'none';
 }
 let bookArray;
-
+//Currently, the onclick functions run before myLibrary or addBookToListener, meaning that they cannot access these elements.
 let submit = document.querySelector('#submit')
 submit.addEventListener('click', function () {
     let titles = document.querySelector('#title');
