@@ -1,9 +1,19 @@
 let myLibrary = [
-    { title: 'Dune', author: 'Frank Herbert', pages: '412', read: false },
-    { title: 'The Hobbit', author: 'J. R. R. Tolkien', pages: '310', read: true },
-    { title: '1Q84', author: 'Haruki Murakami', pages: '928', read: true },
-    { title: 'Blood Meridian', author: 'Cormac McCarthy', pages: '337', read: true },
-    { title: 'No Country for Old Men', author: 'Cormac McCarthy', pages: '320', read: false }
+    {
+        title: 'Dune', author: 'Frank Herbert', pages: '412', read: false
+    },
+    {
+        title: 'The Hobbit', author: 'J. R. R. Tolkien', pages: '310', read: true
+    },
+    {
+        title: '1Q84', author: 'Haruki Murakami', pages: '928', read: true
+    },
+    {
+        title: 'Blood Meridian', author: 'Cormac McCarthy', pages: '337', read: true
+    },
+    {
+        title: 'No Country for Old Men', author: 'Cormac McCarthy', pages: '320', read: false
+    }
 ];
 
 class Book {
@@ -11,24 +21,106 @@ class Book {
         this.add = { title, author, pages, read };
     }
     addBookToLibrary() {
-        myLibrary.push(this.add)
+        myLibrary.push(this.add);
     }
 }
 
-let book = new Book('The Last', 'Henry', '500', false);
-book.addBookToLibrary();
-
 const cards = (() => {
     let display = document.querySelector('#display');
-    myLibrary.forEach((object) => {
+    for (let i = 0; i < myLibrary.length; i++) {
 
-        console.log(Object.values(object))
 
-        let card = document.createElement('p');
-        card.classList.add('card');
+        let content = document.createElement('p');
+        content.classList.add('content');
 
-        card.textContent = JSON.stringify(Object.values(object));
 
-        display.appendChild(card);
-    })
+        for (let property in myLibrary[i]) {
+
+            let box = document.createElement('div');
+            let head = document.createElement('h2');
+            let lower = document.createElement('p');
+
+            head.textContent = property;
+            lower.textContent = myLibrary[i][property];
+
+            head.classList.add('head');
+            lower.classList.add('lower');
+
+            box.appendChild(head);
+            box.appendChild(lower);
+            box.classList.add('box');
+            content.appendChild(box);
+            display.appendChild(content);
+        }
+    }
+})();
+
+
+const addNew = (() => {
+
+    let newBook = document.querySelector('#new');
+
+    newBook.addEventListener('click', openForm);
+
+    function openForm() {
+        document.getElementById('myForm').style.display = 'block';
+    }
+
+
+})();
+
+function closeForm() {
+    document.getElementById('myForm').style.display = 'none';
+}
+
+const cancel = (() => {
+    let close = document.querySelector('#close');
+
+    close.addEventListener('click', closeForm);
+
+
+})();
+
+const addition = (() => {
+
+    let submit = document.querySelector('#submit');
+
+    submit.addEventListener('click', submitForm);
+
+    function updateDisplay() {
+        let content = document.createElement('p');
+        content.classList.add('content');
+        for (let property in myLibrary[myLibrary.length - 1]) {
+
+            let box = document.createElement('div');
+            let head = document.createElement('h2');
+            let lower = document.createElement('p');
+
+            head.textContent = property;
+            lower.textContent = myLibrary[myLibrary.length - 1][property];
+
+            head.classList.add('head');
+            lower.classList.add('lower');
+
+            box.appendChild(head);
+            box.appendChild(lower);
+            box.classList.add('box');
+            content.appendChild(box);
+            display.appendChild(content);
+        }
+    }
+
+    function submitForm() {
+        let title = document.querySelector('#title');
+        let author = document.querySelector('#author');
+        let pages = document.querySelector('#pages');
+        let read = document.querySelector('#read');
+
+        let book = new Book(title.value, author.value, pages.value, read.value);
+        book.addBookToLibrary();
+        closeForm();
+        updateDisplay();
+
+
+    }
 })();

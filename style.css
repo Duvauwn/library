@@ -1,0 +1,47 @@
+body {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form {
+    display:none;
+}
+
+.form-popup {
+    display:flex;
+    flex-direction: column;
+    border:1px solid black;
+}
+
+#display {
+    display:flex;
+    flex-direction: column;
+    width:90vw;
+    height:50vh;
+}
+
+.content {
+    border:2px solid #142d72;
+    display:flex;
+    justify-content: space-around;
+    width:90vw;
+    height:150px;
+}
+
+.box {
+    box-sizing: border-box;
+    border:1px solid red;
+    display:flex;
+    flex-direction: column;
+    width:15vw;
+    flex:0 1 auto;
+}
+
+.head {
+    margin:0px;
+    text-align: center;
+}
+.lower {
+    text-align: center;
+}
