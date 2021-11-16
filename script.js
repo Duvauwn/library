@@ -25,7 +25,7 @@ class Book {
     }
 }
 
-const cards = (() => {
+const creatDisplay = (() => {
     let display = document.querySelector('#display');
     for (let i = 0; i < myLibrary.length; i++) {
 
@@ -87,9 +87,24 @@ const addition = (() => {
 
     submit.addEventListener('click', submitForm);
 
+    function submitForm() {
+        let t = document.querySelector('#title');
+        let a = document.querySelector('#author');
+        let p = document.querySelector('#pages');
+        let r = document.querySelector('#read');
+
+        let book = new Book(t.value, a.value, p.value, r.value);
+        book.addBookToLibrary();
+        closeForm();
+        updateDisplay();
+
+    }
+
     function updateDisplay() {
         let content = document.createElement('p');
         content.classList.add('content');
+
+
         for (let property in myLibrary[myLibrary.length - 1]) {
 
             let box = document.createElement('div');
@@ -110,17 +125,4 @@ const addition = (() => {
         }
     }
 
-    function submitForm() {
-        let title = document.querySelector('#title');
-        let author = document.querySelector('#author');
-        let pages = document.querySelector('#pages');
-        let read = document.querySelector('#read');
-
-        let book = new Book(title.value, author.value, pages.value, read.value);
-        book.addBookToLibrary();
-        closeForm();
-        updateDisplay();
-
-
-    }
 })();
