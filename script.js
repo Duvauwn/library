@@ -1,58 +1,107 @@
 let myLibrary = [
     {
-        title: 'Dune', author: 'Frank Herbert', pages: '412', read: false
+        title: 'Dune', author: 'Frank Herbert', pages: '412', read: 'yes',
     },
     {
-        title: 'The Hobbit', author: 'J. R. R. Tolkien', pages: '310', read: true
+        title: 'The Hobbit', author: 'J. R. R. Tolkien', pages: '310', read: 'no'
     },
     {
-        title: '1Q84', author: 'Haruki Murakami', pages: '928', read: true
+        title: '1Q84', author: 'Haruki Murakami', pages: '928', read: 'no'
     },
     {
-        title: 'Blood Meridian', author: 'Cormac McCarthy', pages: '337', read: true
+        title: 'Blood Meridian', author: 'Cormac McCarthy', pages: '337', read: 'yes'
     },
     {
-        title: 'No Country for Old Men', author: 'Cormac McCarthy', pages: '320', read: false
+        title: 'No Country for Old Men', author: 'Cormac McCarthy', pages: '320', read: 'yes'
     }
 ];
 
 class Book {
     constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
         this.add = { title, author, pages, read };
     }
     addBookToLibrary() {
         myLibrary.push(this.add);
     }
+    changeReadStatus() {
+
+    }
+
 }
 
-const creatDisplay = (() => {
-    let display = document.querySelector('#display');
-    for (let i = 0; i < myLibrary.length; i++) {
+function updateDisplay(i) {
+    let content = document.createElement('p');
+    content.classList.add('content');
 
+    let remove = document.createElement('button');
+    remove.classList.add('remove');
+    remove.setAttribute('id', i);
+    remove.setAttribute('type', 'button');
+    remove.textContent = 'remove';
 
-        let content = document.createElement('p');
-        content.classList.add('content');
-
-
-        for (let property in myLibrary[i]) {
-
-            let box = document.createElement('div');
-            let head = document.createElement('h2');
-            let lower = document.createElement('p');
-
-            head.textContent = property;
-            lower.textContent = myLibrary[i][property];
-
-            head.classList.add('head');
-            lower.classList.add('lower');
-
-            box.appendChild(head);
-            box.appendChild(lower);
-            box.classList.add('box');
-            content.appendChild(box);
-            display.appendChild(content);
+    let change = document.createElement('button');
+    change.textContent = 'Change';
+    change.addEventListener('click', function () {
+        console.log(myLibrary[i]['read'])
+        if (change.parentNode.childNodes[1].textContent == 'yes') {
+            change.parentNode.childNodes[1].textContent = 'no';
+            myLibrary[i]['read'] = 'no';
         }
+        else if (change.parentNode.childNodes[1].textContent == 'no') {
+            change.parentNode.childNodes[1].textContent = 'yes';
+            myLibrary[i]['read'] = 'yes';
+        }
+    })
+
+    for (let property in myLibrary[i]) {
+
+
+        let box = document.createElement('div');
+        let head = document.createElement('h2');
+        let lower = document.createElement('p');
+
+        head.textContent = property;
+        lower.textContent = myLibrary[i][property];
+
+        head.classList.add('head');
+        lower.classList.add('lower');
+
+        content.setAttribute('data-index', i)
+
+        box.appendChild(head);
+        box.appendChild(lower);
+
+        if (property == 'read') {
+            box.appendChild(change);
+        }
+
+        box.classList.add('box');
+
+        content.appendChild(box);
     }
+
+    content.appendChild(remove);
+    display.appendChild(content);
+
+    remove.addEventListener('click', function () {
+        myLibrary.splice(remove.id, 1)
+        display.innerHTML = ''
+        myLibrary.forEach(function (item, index) {
+            updateDisplay(index);
+        })
+    })
+
+}
+
+const createDisplay = (() => {
+    myLibrary.forEach(function (item, i) {
+
+        updateDisplay(i);
+    })
 })();
 
 
@@ -91,38 +140,22 @@ const addition = (() => {
         let t = document.querySelector('#title');
         let a = document.querySelector('#author');
         let p = document.querySelector('#pages');
-        let r = document.querySelector('#read');
+        let r = document.querySelectorAll('.read');
+        let read;
+        r.forEach(radio => {
+            if (radio.checked == true) {
+                return read = radio.value;
+            }
+            else if (radio.checked == false) {
+                return;
+            }
+        })
 
-        let book = new Book(t.value, a.value, p.value, r.value);
+        let book = new Book(t.value, a.value, p.value, read);
         book.addBookToLibrary();
+
         closeForm();
-        updateDisplay();
+        updateDisplay(myLibrary.length - 1);
 
     }
-
-    function updateDisplay() {
-        let content = document.createElement('p');
-        content.classList.add('content');
-
-
-        for (let property in myLibrary[myLibrary.length - 1]) {
-
-            let box = document.createElement('div');
-            let head = document.createElement('h2');
-            let lower = document.createElement('p');
-
-            head.textContent = property;
-            lower.textContent = myLibrary[myLibrary.length - 1][property];
-
-            head.classList.add('head');
-            lower.classList.add('lower');
-
-            box.appendChild(head);
-            box.appendChild(lower);
-            box.classList.add('box');
-            content.appendChild(box);
-            display.appendChild(content);
-        }
-    }
-
 })();
