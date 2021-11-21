@@ -34,6 +34,7 @@ class Book {
 }
 
 function updateDisplay(i) {
+
     let content = document.createElement('p');
     content.classList.add('content');
 
@@ -46,7 +47,6 @@ function updateDisplay(i) {
     let change = document.createElement('button');
     change.textContent = 'Change';
     change.addEventListener('click', function () {
-        console.log(myLibrary[i]['read'])
         if (change.parentNode.childNodes[1].textContent == 'yes') {
             change.parentNode.childNodes[1].textContent = 'no';
             myLibrary[i]['read'] = 'no';
@@ -95,11 +95,16 @@ function updateDisplay(i) {
         })
     })
 
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
 }
 
 const createDisplay = (() => {
+    if (localStorage.myLibrary.length > 0) {
+        let items = localStorage.getItem('myLibrary');
+        let myLibrary = JSON.parse(items);
+        console.log(myLibrary)
+    }
     myLibrary.forEach(function (item, i) {
-
         updateDisplay(i);
     })
 })();
