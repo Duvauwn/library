@@ -2,6 +2,9 @@ body {
     display:flex;
     flex-direction: column;
     align-items: center;
+    font-family: monospace;
+    background-image: url('lib.jpg');
+    color: #f2dcb1;
 }
 
 .form {
@@ -11,7 +14,27 @@ body {
 .form-popup {
     display:flex;
     flex-direction: column;
-    border:1px solid black;
+    border:1px solid #dc8920;
+    border-radius: 10px;
+    height:500px;
+    width:350px;
+    justify-content: space-around;
+    font-size: 20px;
+}
+.inputs {
+    background-color: transparent;
+    border:2px solid #dc8920;
+    border-radius: 5px;
+    width:300px;
+}
+#read-container {
+    display:flex;
+}
+#submit {
+    background-color: #5fa344c4;
+}
+#close {
+    background-color: #ca042f60;
 }
 
 #display {
@@ -19,19 +42,21 @@ body {
     flex-direction: column;
     width:90vw;
     height:50vh;
+    align-items: center;
 }
 
 .content {
-    border:2px solid #142d72;
+    border:2px solid #dc8920;
+    border-radius: 10px;;
     display:flex;
     justify-content: space-around;
-    width:90vw;
+    width:65vw;
     height:150px;
+    background-image: linear-gradient(45deg , #be8e3c65, #d99e2954);
 }
 
 .box {
     box-sizing: border-box;
-    border:1px solid red;
     display:flex;
     flex-direction: column;
     width:15vw;
@@ -44,4 +69,8 @@ body {
 }
 .lower {
     text-align: center;
+}
+.remove {
+    background-color: #ca042f60;
+    border-radius: 10px;
 }

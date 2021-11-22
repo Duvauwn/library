@@ -19,22 +19,23 @@
         <form class='form-popup' id='form-container'>
 
             <h2>Add a New Book</h2>
-
             <label for='title'>Title</label>
-            <input id='title' type='text' name='title'>
+            <input id='title' type='text' name='title' class='inputs'>
 
             <label for='author'>Author</label>
-            <input id='author' type='text' name='author'>
+            <input id='author' type='text' name='author' class='inputs'>
 
             <label for='pages'>Pages</label>
-            <input id='pages' type='text' name='pages'>
+            <input id='pages' type='text' name='pages' class='inputs'>
 
             <p>Read</p>
-            <input id='yes' type='radio' name='read' value='yes' class='read' checked>
-            <label for='yes'>Yes</label>
+            <div id='read-container'>
+                <input id='yes' type='radio' name='read' value='yes' class='read' checked>
+                <label for='yes'>Yes</label>
 
-            <input id='no' type='radio' name='read' value='no' class='read'>
-            <label for='no'>No</label>
+                <input id='no' type='radio' name='read' value='no' class='read'>
+                <label for='no'>No</label>
+            </div>
 
             <button type='button' id='submit'>Submit</button>
             <button type='button' id='close'>Close</button>
